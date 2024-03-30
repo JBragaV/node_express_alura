@@ -1,8 +1,11 @@
 import express from "express";
+import meuMiddle from "./middleware.mjs";
 
 const app = express();
 app.use(express.json())
+app.use(meuMiddle);
 
+/*"""Bando de Dados"""*/
 const LIVROS = [
     {
         "id": 1,
@@ -12,13 +15,20 @@ const LIVROS = [
         "id": 2,
         "nome": 'Eu sou a lenda'
     }
-]
+];
+/*"""Fim Bando de Dados"""*/
+
+
 
 app.get('/', (req, res) => {
     res.status(200).send("Iniciado servidor NodeJs do curso API com node e express da ALura!!!");
 });
 
 app.get('/livros', (req, res) => {
+    console.log(req.jocimar);
+    LIVROS.forEach(livro => {
+        livro.mester = req.jocimar;
+    });
     res.status(200).json(LIVROS);
 })
 
@@ -51,7 +61,6 @@ function buscaLivro(id) {
     });
     return index
 }
-
 
 
 export default app;
