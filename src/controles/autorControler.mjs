@@ -20,10 +20,10 @@ class autorControler {
             res.status(200).json(autorBuscado);
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao buscar e listar o autores no Banco de Dados.`
+                message: `${error.message} - Falha ao buscar e listar o autores do Banco de Dados.`
             });
         }
-    }
+    };
 
     static async cadastrarAutor(req, res) {
         try {
@@ -37,7 +37,7 @@ class autorControler {
                 message: `${error.message} - Falha ao cadastrar o autor`
             });
         }
-    }
+    };
 
     static async atualizarAutor(req, res) {
         try {
@@ -49,7 +49,7 @@ class autorControler {
                 message: `${error.message} - Falha ao atualizar o autor no Banco de Dados.`
             });
         }
-    }
+    };
 
     static async deletarAutor(req, res){
         try {
@@ -61,7 +61,7 @@ class autorControler {
                 message: `${error.message} - Falha ao deletar o autor no Banco de Dados.`
             });
         }
-    }
+    };
 
 };
 

@@ -1,3 +1,4 @@
+import { autor } from "../models/autor.mjs";
 import livro from "../models/livro.js";
 
 class LivroControler {
@@ -11,6 +12,15 @@ class LivroControler {
                 message: `${error.message} - Falha ao buscar e listar os livros do Banco de Dados.`
             });
         }
+
+        /*
+        try {
+            const listaLivros = await livro.find({}).populate("autor").exec();
+            res.status(200).json(listaLivros);
+        } catch (erro) {
+            res.status(500).json({ message: `${erro.message} - falha na requisição` });
+        }
+        */
     };
 
     static async buscaLivroPorId(req, res) {
@@ -26,11 +36,15 @@ class LivroControler {
     }
 
     static async cadastrarLivro(req, res) {
+        const novoLivro = req.body;
         try {
-            const novoLivro = await livro.create(req.body);
+            const autorEncontrado = await autor.findById(novoLivro.autor);
+            console.log(autorEncontrado);
+            const livroCompleto = { ...novoLivro, autor: { ...autorEncontrado._doc }};
+            const livroCriado = await livro.create(livroCompleto);
             res.status(201).json({
                 message: "Livro Criado com sucesso",
-                livro: novoLivro
+                livro: livroCriado
             });
         } catch (error) {
             res.status(500).json({
@@ -59,6 +73,18 @@ class LivroControler {
         } catch (error) {
             res.status(500).json({
                 message: `${error.message} - Falha ao deletar o livro no Banco de Dados.`
+            });
+        }
+    }
+
+    static async listaLivrosPorEditora(req, res) {
+        const editora = req.query.editora;
+        try {
+            const livrosPorEditora = await livro.find({ editora });
+            res.status(200).json(livrosPorEditora);
+        } catch (error) {
+            res.status(500).json({
+                message: `${error.message} - Falha ao buscar os livro por editora no Banco de Dados.`
             });
         }
     }
