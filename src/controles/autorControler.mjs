@@ -8,7 +8,7 @@ class autorControler {
             res.status(200).json(listaAutores);
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao buscar e listar os livros do Banco de Dados.`
+                message: `${error.message} - Falha ao buscar e listar os autores do Banco de Dados.`
             });
         }
     };
@@ -20,7 +20,7 @@ class autorControler {
             res.status(200).json(autorBuscado);
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao buscar e listar o livro no Banco de Dados.`
+                message: `${error.message} - Falha ao buscar e listar o autores no Banco de Dados.`
             });
         }
     }
@@ -34,7 +34,7 @@ class autorControler {
             });
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao cadastrar livro`
+                message: `${error.message} - Falha ao cadastrar o autor`
             });
         }
     }
@@ -43,10 +43,10 @@ class autorControler {
         try {
             const idAutor = req.params.id;
             await autor.findByIdAndUpdate(idAutor, req.body);
-            res.status(200).json({message: "Livro atualizado com sucesso"});
+            res.status(200).json({message: "Autor atualizado com sucesso"});
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao atualizar o livro no Banco de Dados.`
+                message: `${error.message} - Falha ao atualizar o autor no Banco de Dados.`
             });
         }
     }
@@ -55,10 +55,10 @@ class autorControler {
         try {
             const idAutor = req.params.id;
             await autor.findByIdAndDelete(idAutor);
-            res.status(200).json({message: "Livro Deletado com sucesso"});
+            res.status(200).json({message: "Autor Deletado com sucesso"});
         } catch (error) {
             res.status(500).json({
-                message: `${error.message} - Falha ao deletar o livro no Banco de Dados.`
+                message: `${error.message} - Falha ao deletar o autor no Banco de Dados.`
             });
         }
     }
